@@ -73,4 +73,13 @@
 | Files in `.gitignore` not being ignored (previously committed) | Delete files from cache | Commit all changes<br>Clear cached files: `git rm -r --cached .`<br>Add all (non-ignored) files: `git add .` |
 | Tags only appear on local machine | Need to push tags to remote | `git push --tags` |
 | Thoroughly screwed up *your local repo* | Reset to known-good commit | See list of changes (find `n`): `git reflog`<br>Reset repo state to commit: `git reset --hard HEAD@{n}`<br>**THIS WILL DESTROY ANY UNCOMMITTED CHANGES.**<br>(Use `--soft` to keep new changes) |
-| Thoroughly screwed up *main* | Find a new job | Close your terminal: `exit`<br>Force it to close: `exit` (again) |
+| Thoroughly screwed up *remote/main* | Find a new job | Close your terminal: `exit`<br>Force it to close: `exit` (again) |
+| Git shows branches from origin that have been deleted | Prune branches | `git fetch --prune` |
+| Forgot to sign into the correct account before making a commit | Amend the commit | `git commit --amend --author="<username> <email>"` or configure the account then run `git commit --amend --reset-author` |
+| Forgot to sign into the correct account before making A LOT of commits | Use git rebase to amend the affected commits | `git rebase -i` then change affected commits from `pick` to `edit` in text editor window, then amend each commit (see above entry), then use `git rebase --continue` |
+
+## Problems vs. Solutions (Upgraded Edition)
+Need to amend one or more commits that have been pushed to remote.
+* Make your changes, then use `git push --force-with-lease`.
+* Force with lease checks that the remote repository looks the same as it did before you began amending the commits, cancelling the push if someone made changes to the remote repository that you didn't pull.
+	* This is significantly safer than `git push --force`, which does not check if any changes have been made to the remote repository before pushing. If changes were made, `--force` will erase them, whereas `--force-with-lease` will cancel the push until you properly merge the new changes.
