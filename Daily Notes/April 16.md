@@ -29,3 +29,7 @@ This also makes it easy to restrict access to malicious users:
 
 ### Versions
 Several versions of an API may be hosted at the same time to allow for backwards compatibility.
+
+## REST & GraphQL
+* REST gives you *whatever data the website wants to give you*.
+* GraphQL allows you to specify exactly what data you want back (and is more efficient as a result).
