@@ -30,6 +30,50 @@ This also makes it easy to restrict access to malicious users:
 ### Versions
 Several versions of an API may be hosted at the same time to allow for backwards compatibility.
 
-## REST & GraphQL
+## API Protocols
+
+### HTTP
+* HTTP is a protocol used to transfer data across the web.
+* The [original version](https://www.w3.org/Protocols/HTTP/AsImplemented.html) of HTTP was extremely simple.
+
+### REST & GraphQL
 * REST gives you *whatever data the website wants to give you*.
 * GraphQL allows you to specify exactly what data you want back (and is more efficient as a result).
+
+## What can go wrong
+* Network error (e.g. not connected)
+* Server down
+* API has changed
+  * Function calls changed
+  * In or out JSON has changed
+  * APIs have versions to combat this
+* API version being used becomes deprecated
+* Authentication fails
+  * Authentication type changed to a more secure type
+  * Your key was revoked (e.g. from non-payment)
+* API is too slow
+  * Servers are overloaded
+  * Poor network connection
+
+## Managing Slow APIs
+When your program has to wait for something that could take a long time, you don't want to block other programs from using your CPU in the meantime.
+
+In order to do this, `async` functions can be used.
+
+Asynchronous (`async`) functions pause execution of a program until an event occurs, allowing other programs to use the CPU in the meantime.
+
+### Javascript
+`async` is used to create an asynchronous function:
+```js
+async function name(parameter0, parameter1) {
+  // ...
+}
+```
+
+`await` is used within an asynchronous function to indicate the program should wait for the result of an expression:
+```js
+async function getAsynchronousValue() {
+  return await complicatedFunctionCall();
+}
+```
+* The program's execution stops until `complicatedFunctionCall()` returns a value, allowing the computer to run other programs in the meantime.
